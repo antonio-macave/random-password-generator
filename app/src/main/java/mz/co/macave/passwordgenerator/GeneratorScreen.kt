@@ -1,11 +1,16 @@
 package mz.co.macave.passwordgenerator
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -60,8 +65,48 @@ fun TextInput() {
     
 }
 
+
+@Composable
+fun OptionsToInclude() {
+
+    var includeCapitalLetters by remember { mutableStateOf(false) }
+    var includeNonCapitalLetters by remember { mutableStateOf(false) }
+    var includeNumbers by remember { mutableStateOf(false) }
+    var includeSpecialCharacters by remember { mutableStateOf(false) }
+
+
+    CheckBoxOption(text = "Incluir letras maiúsculas", checked = includeCapitalLetters) {
+        includeCapitalLetters = !includeCapitalLetters
+    }
+
+    CheckBoxOption(text = "Incluir letras minúsculas", checked = includeNonCapitalLetters) {
+        includeNonCapitalLetters = !includeNonCapitalLetters
+    }
+
+    CheckBoxOption(text = "Incluir números", checked = includeNumbers) {
+        includeNumbers = !includeNumbers
+    }
+
+    CheckBoxOption(text = "Incluir caracteres especiais", checked = includeSpecialCharacters) {
+        includeSpecialCharacters = !includeSpecialCharacters
+    }
+}
+
+@Composable
+fun CheckBoxOption(text: String, checked: Boolean, onCheckedChanged: () -> Unit) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(checked = checked, onCheckedChange = { onCheckedChanged() } )
+        Text(text = text)
+    }
+}
+
 @Preview
 @Composable
 fun Previews() {
-    TextInput()
+    Column {
+        TextInput()
+        OptionsToInclude()
+    }
 }
