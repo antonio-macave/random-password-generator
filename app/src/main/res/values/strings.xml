@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Password Generator</string>
+
+    <string name="include_capital_letters">Incluir letras maiúsculas</string>
+    <string name="include_noncapital_letters">Incluir letras minúsculas</string>
+    <string name="include_numbers">Incluir números</string>
+    <string name="include_special_chars">Incluir caracteres especiais</string>
 </resources>
