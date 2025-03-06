@@ -1,12 +1,15 @@
 package mz.co.macave.passwordgenerator
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Slider
@@ -117,6 +120,27 @@ fun OptionsToInclude() {
     }
 }
 
+
+@Composable
+fun GenerateButton(onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .padding(24.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        ElevatedButton(onClick = { onClick() }) {
+            Icon(painter = painterResource(id = R.drawable.ic_generate_24), contentDescription = stringResource(
+                id = R.string.generate_password
+            ))
+            Text(text = stringResource(id = R.string.generate_password))
+        }
+    }
+}
+
+
+
 @Composable
 fun CheckBoxOption(text: String, checked: Boolean, onCheckedChanged: () -> Unit) {
     Row(
@@ -137,5 +161,8 @@ fun Previews() {
         TextInput()
         PasswordLengthRange()
         OptionsToInclude()
+        GenerateButton {
+
+        }
     }
 }
