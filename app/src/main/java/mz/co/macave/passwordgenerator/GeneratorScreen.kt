@@ -7,9 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Slider
@@ -25,8 +24,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun TextInput() {
@@ -39,7 +40,7 @@ fun TextInput() {
 
         TextField(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(24.dp)
                 .fillMaxWidth()
                 .weight(0.85f),
             value = text,
@@ -71,25 +72,33 @@ fun TextInput() {
 @Composable
 fun PasswordLengthRange() {
     var currentValue by remember { mutableFloatStateOf(10f) }
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Slider(
-            modifier = Modifier
-                .padding(24.dp)
-                .fillMaxWidth()
-                .weight(0.85f),
-            value = currentValue,
-            onValueChange = { value ->
-                currentValue = value
-            },
-            valueRange = 10f..100f,
-        )
-        
+    Column {
         Text(
-            modifier = Modifier.weight(0.15f),
-            text = currentValue.toInt().toString()
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = "Quantidade de caracteres"
         )
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Slider(
+                modifier = Modifier
+                    .padding(24.dp)
+                    .fillMaxWidth()
+                    .weight(0.85f),
+                value = currentValue,
+                onValueChange = { value ->
+                    currentValue = value
+                },
+                valueRange = 10f..100f,
+            )
+
+            Text(
+                modifier = Modifier.weight(0.15f),
+                text = currentValue.toInt().toString(),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
     }
 }
 
@@ -130,7 +139,7 @@ fun GenerateButton(onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        ElevatedButton(onClick = { onClick() }) {
+        Button(onClick = { onClick() }) {
             Icon(painter = painterResource(id = R.drawable.ic_generate_24), contentDescription = stringResource(
                 id = R.string.generate_password
             ))
@@ -149,7 +158,11 @@ fun CheckBoxOption(text: String, checked: Boolean, onCheckedChanged: () -> Unit)
             .clickable { onCheckedChanged() },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Checkbox(checked = checked, onCheckedChange = { onCheckedChanged() } )
+        Checkbox(
+            modifier = Modifier.padding(start = 16.dp),
+            checked = checked,
+            onCheckedChange = { onCheckedChanged() }
+        )
         Text(text = text)
     }
 }
