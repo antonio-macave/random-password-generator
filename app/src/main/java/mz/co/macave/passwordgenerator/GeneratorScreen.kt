@@ -15,11 +15,8 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -28,11 +25,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mz.co.macave.passwordgenerator.viewmodel.MainActivityViewModel
 
 @Composable
-fun TextInput() {
+fun TextInput(viewModel: MainActivityViewModel) {
 
-    var text by remember { mutableStateOf("") }
+    val text by viewModel.password.collectAsStateWithLifecycle()
 
     Row(
         verticalAlignment = Alignment.CenterVertically
@@ -45,8 +44,10 @@ fun TextInput() {
                 .weight(0.85f),
             value = text,
             readOnly = true,
-            onValueChange = {word ->
-                text = word
+            onValueChange = { word ->
+                viewModel.updatePasswordValue {
+                    //If no include option is selected
+                }
             }
         )
         
@@ -70,8 +71,8 @@ fun TextInput() {
 
 
 @Composable
-fun PasswordLengthRange() {
-    var currentValue by remember { mutableFloatStateOf(10f) }
+fun PasswordLengthRange(viewModel: MainActivityViewModel) {
+    val currentValue by viewModel.sliderValue.collectAsStateWithLifecycle()
     Column {
         Text(
             modifier = Modifier.padding(horizontal = 16.dp),
@@ -87,7 +88,7 @@ fun PasswordLengthRange() {
                     .weight(0.85f),
                 value = currentValue,
                 onValueChange = { value ->
-                    currentValue = value
+                    viewModel.updateSliderValue(value)
                 },
                 valueRange = 10f..100f,
             )
@@ -104,28 +105,28 @@ fun PasswordLengthRange() {
 
 
 @Composable
-fun OptionsToInclude() {
+fun OptionsToInclude(viewModel: MainActivityViewModel) {
 
-    var includeCapitalLetters by remember { mutableStateOf(false) }
-    var includeNonCapitalLetters by remember { mutableStateOf(false) }
-    var includeNumbers by remember { mutableStateOf(false) }
-    var includeSpecialCharacters by remember { mutableStateOf(false) }
+    val includeCapitalLetters by viewModel.includeCapitalLetters.collectAsState()
+    val includeNonCapitalLetters by viewModel.includeNonCapitalLetters.collectAsStateWithLifecycle()
+    val includeNumbers by viewModel.includeNumbers.collectAsStateWithLifecycle()
+    val includeSpecialCharacters by viewModel.includeSpecialChars.collectAsStateWithLifecycle()
 
 
     CheckBoxOption(text = stringResource(id = R.string.include_capital_letters), checked = includeCapitalLetters) {
-        includeCapitalLetters = !includeCapitalLetters
+        viewModel.updateIncludeCapitalLetterValue(!includeCapitalLetters)
     }
 
     CheckBoxOption(text = stringResource(id = R.string.include_noncapital_letters), checked = includeNonCapitalLetters) {
-        includeNonCapitalLetters = !includeNonCapitalLetters
+        viewModel.updateIncludeNonCapitalLettersValue(!includeNonCapitalLetters)
     }
 
     CheckBoxOption(text = stringResource(id = R.string.include_numbers), checked = includeNumbers) {
-        includeNumbers = !includeNumbers
+        viewModel.updateIncludeNumbersValue(!includeNumbers)
     }
 
     CheckBoxOption(text = stringResource(id = R.string.include_special_chars), checked = includeSpecialCharacters) {
-        includeSpecialCharacters = !includeSpecialCharacters
+        viewModel.updateIncludeSpecialCharsValue(!includeSpecialCharacters)
     }
 }
 
@@ -171,9 +172,9 @@ fun CheckBoxOption(text: String, checked: Boolean, onCheckedChanged: () -> Unit)
 @Composable
 fun Previews() {
     Column {
-        TextInput()
-        PasswordLengthRange()
-        OptionsToInclude()
+        //TextInput()
+        //PasswordLengthRange()
+       // OptionsToInclude()
         GenerateButton {
 
         }
