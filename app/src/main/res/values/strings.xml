@@ -5,4 +5,13 @@
     <string name="include_noncapital_letters">Incluir letras minúsculas</string>
     <string name="include_numbers">Incluir números</string>
     <string name="include_special_chars">Incluir caracteres especiais</string>
+    <string name="generate_password">Gerar senha</string>
+    <string name="please_select_an_option">Por favor, inclua algum tipo de caractere.</string>
+    <string name="disclaimer_title">Disclaimer</string>
+    <string name="disclaimer_content">
+        Este aplicativo foi desenvolvido para fins de entretenimento e uso geral.
+        As senhas geradas neste aplicativo não devem, em nenhuma circunstância, serem utilizadas para proteger informações sensíveis.
+        O desenvenvolvedor não se responsabiliza por quaisquer danos ou perdas decorrentes do uso das senhas geradas.
+    </string>
+    <string name="got_it">Entendido</string>
 </resources>
