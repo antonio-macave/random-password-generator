@@ -10,25 +10,34 @@ class MainActivityViewModel : ViewModel() {
         includeNonCapitalLetters: Boolean,
         includeNumbers: Boolean,
         includeSpecialCharacters: Boolean
-    ) : List<String>{
+    ) : String {
 
-        val letters = StringBuilder()
+        val chars = StringBuilder()
 
         if (includeCapitalLetters) {
-            letters.append("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z")
+            chars.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         }
 
         if (includeNonCapitalLetters) {
-            letters.append("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z")
+            chars.append("abcdefghijklmnopqrstuvwxyz")
         }
 
         if (includeNumbers) {
-            letters.append("1,2,3,4,5,6,7,8,9,0")
+            chars.append("1234567890")
         }
 
         if (includeSpecialCharacters) {
-            letters.append("!,$,%,&,#")
+            chars.append("!$%&#")
         }
-        return letters.split(",")
+        return chars.toString()
+    }
+
+    private fun computePassword(charsQuantity: Int, charsList: List<String>) : String {
+        val password = StringBuilder()
+        val random = Random()
+        for (value in charsList.take(charsQuantity)) {
+            password.append(value[random.nextInt(charsQuantity+1)])
+        }
+        return password.toString()
     }
 }
