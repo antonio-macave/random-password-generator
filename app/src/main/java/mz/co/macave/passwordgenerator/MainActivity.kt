@@ -55,8 +55,6 @@ class MainActivity : ComponentActivity() {
 
                     Column(modifier = Modifier.padding(innerPadding)) {
 
-
-
                         TextInput(viewModel)
                         PasswordLengthRange(viewModel)
                         OptionsToInclude(viewModel)
@@ -74,7 +72,8 @@ class MainActivity : ComponentActivity() {
 
                     if (showDisclaimerDialog) {
                         DisclaimerDialog {
-
+                            //OnDismissRequest
+                            viewModel.updateShowDisclaimerDialogValue(false)
                         }
                     }
 
@@ -97,7 +96,7 @@ fun TopAppBar(viewModel: MainActivityViewModel) {
         actions = {
             IconButton(
                 onClick = {
-                    viewModel.updateShowDisclaimerDialogValue(!showDisclaimerDialog)
+                    viewModel.updateShowDisclaimerDialogValue(true)
                 }
             ) {
                 Icon(imageVector = Icons.Default.Info, contentDescription = null)

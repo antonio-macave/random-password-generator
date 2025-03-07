@@ -29,7 +29,7 @@ import mz.co.macave.passwordgenerator.R
 
 @Composable
 fun DisclaimerDialog(onDismissRequest: ()-> Unit) {
-    Dialog(onDismissRequest = onDismissRequest) {
+    Dialog(onDismissRequest = {   }) {
         Card(
             modifier = Modifier
                 .padding(24.dp)
@@ -49,9 +49,7 @@ fun DisclaimerDialog(onDismissRequest: ()-> Unit) {
                     text = stringResource(id = R.string.disclaimer_content)
                 )
                 HorizontalDivider()
-                BottomButton {
-
-                }
+                BottomButton(onClick = onDismissRequest)
 
             }
         }
