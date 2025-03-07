@@ -7,14 +7,28 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
+import mz.co.macave.passwordgenerator.ui.GenerateButton
+import mz.co.macave.passwordgenerator.ui.OptionsToInclude
+import mz.co.macave.passwordgenerator.ui.PasswordLengthRange
+import mz.co.macave.passwordgenerator.ui.TextInput
 import mz.co.macave.passwordgenerator.ui.theme.PasswordGeneratorTheme
 import mz.co.macave.passwordgenerator.viewmodel.MainActivityViewModel
 
@@ -30,9 +44,8 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    snackbarHost = {
-                        SnackHost(host = snackbarHostState)
-                    }
+                    topBar = { TopAppBar() },
+                    snackbarHost = { SnackHost(host = snackbarHostState) }
                 ) { innerPadding ->
 
                     Column(modifier = Modifier.padding(innerPadding)) {
@@ -58,6 +71,24 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar() {
+    MediumTopAppBar(
+        title = { Text(text = stringResource(id = R.string.app_name)) },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
+        actions = {
+            IconButton(onClick = {  }) {
+                Icon(imageVector = Icons.Default.Info, contentDescription = null)
+            }
+        }
+    )
+}
+
 
 @Composable
 fun SnackHost(host: SnackbarHostState) {
