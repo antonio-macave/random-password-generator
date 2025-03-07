@@ -1,10 +1,11 @@
 package mz.co.macave.passwordgenerator.viewmodel
 
 import androidx.lifecycle.ViewModel
+import java.util.Random
 
 class MainActivityViewModel : ViewModel() {
 
-    fun defineChars(
+    private fun getDefinedChars(
         includeCapitalLetters: Boolean,
         includeNonCapitalLetters: Boolean,
         includeNumbers: Boolean,
