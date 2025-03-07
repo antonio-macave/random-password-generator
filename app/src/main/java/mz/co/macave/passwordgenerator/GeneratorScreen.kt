@@ -44,7 +44,7 @@ fun TextInput(viewModel: MainActivityViewModel) {
                 .weight(0.85f),
             value = text,
             readOnly = true,
-            onValueChange = { word ->
+            onValueChange = {
                 viewModel.updatePasswordValue {
                     //If no include option is selected
                 }
