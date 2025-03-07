@@ -1,4 +1,4 @@
-package mz.co.macave.passwordgenerator
+package mz.co.macave.passwordgenerator.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mz.co.macave.passwordgenerator.R
 import mz.co.macave.passwordgenerator.viewmodel.MainActivityViewModel
 
 @Composable
