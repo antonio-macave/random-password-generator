@@ -2,6 +2,7 @@ package mz.co.macave.passwordgenerator.viewmodel
 
 import androidx.lifecycle.ViewModel
 import java.util.Random
+import kotlin.random.Random
 
 class MainActivityViewModel : ViewModel() {
 
@@ -32,11 +33,10 @@ class MainActivityViewModel : ViewModel() {
         return chars.toString()
     }
 
-    private fun computePassword(charsQuantity: Int, charsList: List<String>) : String {
+    private fun getComputedPassword(charsQuantity: Int, charsList: String) : String {
         val password = StringBuilder()
-        val random = Random()
-        for (value in charsList.take(charsQuantity)) {
-            password.append(value[random.nextInt(charsQuantity+1)])
+        for (i in 1..charsQuantity) {
+            password.append(charsList[Random.nextInt(charsList.length)])
         }
         return password.toString()
     }
