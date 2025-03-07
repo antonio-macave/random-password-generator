@@ -12,6 +12,9 @@ class MainActivityViewModel : ViewModel() {
     private val _generatedPassword: MutableStateFlow<String> = MutableStateFlow("")
     val password: StateFlow<String> get() = _generatedPassword.asStateFlow()
 
+    private val _showDisclaimerDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val showDisclaimerDialog: StateFlow<Boolean> get() = _showDisclaimerDialog.asStateFlow()
+
     private val _sliderValue: MutableStateFlow<Float> = MutableStateFlow(10f)
     val sliderValue: StateFlow<Float> get() = _sliderValue.asStateFlow()
 
@@ -63,6 +66,10 @@ class MainActivityViewModel : ViewModel() {
 
     fun updateSliderValue(newValue: Float) {
         _sliderValue.value = newValue
+    }
+
+    fun updateShowDisclaimerDialogValue(newValue: Boolean) {
+        _showDisclaimerDialog.value = newValue
     }
 
     private fun getDefinedChars(
