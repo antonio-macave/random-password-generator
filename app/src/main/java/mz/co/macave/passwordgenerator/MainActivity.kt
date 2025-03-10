@@ -87,7 +87,6 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar(viewModel: MainActivityViewModel) {
-    val showDisclaimerDialog by viewModel.showDisclaimerDialog.collectAsStateWithLifecycle()
     MediumTopAppBar(
         title = { Text(text = stringResource(id = R.string.app_name)) },
         colors = TopAppBarDefaults.topAppBarColors(
