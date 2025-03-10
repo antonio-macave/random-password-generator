@@ -50,7 +50,6 @@ fun DisclaimerDialog(onDismissRequest: ()-> Unit) {
                 )
                 HorizontalDivider()
                 BottomButton(onClick = onDismissRequest)
-
             }
         }
     }

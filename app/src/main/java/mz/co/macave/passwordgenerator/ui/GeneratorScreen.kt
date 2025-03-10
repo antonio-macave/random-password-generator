@@ -43,6 +43,7 @@ fun TextInput(viewModel: MainActivityViewModel) {
                 .padding(24.dp)
                 .fillMaxWidth()
                 .weight(0.85f),
+            minLines = 6,
             value = text,
             readOnly = true,
             onValueChange = {
@@ -54,14 +55,14 @@ fun TextInput(viewModel: MainActivityViewModel) {
         
         IconButton(
             modifier = Modifier
-                .weight(0.15f),
+                .weight(0.15f)
+                .padding(end = 24.dp)
+                .size(24.dp),
             onClick = {
 
             }
         ) {
             Icon(
-                modifier = Modifier
-                    .size(32.dp),
                 painter = painterResource(id = R.drawable.ic_content_copy),
                 contentDescription = stringResource(
                     id = android.R.string.copy)
@@ -76,15 +77,20 @@ fun PasswordLengthRange(viewModel: MainActivityViewModel) {
     val currentValue by viewModel.sliderValue.collectAsStateWithLifecycle()
     Column {
         Text(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = "Quantidade de caracteres"
+            modifier = Modifier.padding(horizontal = 24.dp),
+            text = stringResource(id = R.string.characters_quantity),
         )
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Slider(
                 modifier = Modifier
-                    .padding(24.dp)
+                    .padding(
+                        start = 24.dp,
+                        end = 24.dp,
+                        bottom = 24.dp,
+                        top = 8.dp
+                    )
                     .fillMaxWidth()
                     .weight(0.85f),
                 value = currentValue,
@@ -113,20 +119,27 @@ fun OptionsToInclude(viewModel: MainActivityViewModel) {
     val includeNumbers by viewModel.includeNumbers.collectAsStateWithLifecycle()
     val includeSpecialCharacters by viewModel.includeSpecialChars.collectAsStateWithLifecycle()
 
+    Text(
+        modifier = Modifier.padding(
+            start = 24.dp,
+            bottom = 8.dp
+        ),
+        text = stringResource(id = R.string.include)
+    )
 
-    CheckBoxOption(text = stringResource(id = R.string.include_capital_letters), checked = includeCapitalLetters) {
+    CheckBoxOption(text = stringResource(id = R.string.capital_letters), checked = includeCapitalLetters) {
         viewModel.updateIncludeCapitalLetterValue(!includeCapitalLetters)
     }
 
-    CheckBoxOption(text = stringResource(id = R.string.include_noncapital_letters), checked = includeNonCapitalLetters) {
+    CheckBoxOption(text = stringResource(id = R.string.noncapital_letters), checked = includeNonCapitalLetters) {
         viewModel.updateIncludeNonCapitalLettersValue(!includeNonCapitalLetters)
     }
 
-    CheckBoxOption(text = stringResource(id = R.string.include_numbers), checked = includeNumbers) {
+    CheckBoxOption(text = stringResource(id = R.string.numbers), checked = includeNumbers) {
         viewModel.updateIncludeNumbersValue(!includeNumbers)
     }
 
-    CheckBoxOption(text = stringResource(id = R.string.include_special_chars), checked = includeSpecialCharacters) {
+    CheckBoxOption(text = stringResource(id = R.string.special_chars), checked = includeSpecialCharacters) {
         viewModel.updateIncludeSpecialCharsValue(!includeSpecialCharacters)
     }
 }
@@ -173,11 +186,9 @@ fun CheckBoxOption(text: String, checked: Boolean, onCheckedChanged: () -> Unit)
 @Composable
 fun Previews() {
     Column {
-        //TextInput()
-        //PasswordLengthRange()
-       // OptionsToInclude()
-        GenerateButton {
-
-        }
+        val viewModel = MainActivityViewModel()
+        TextInput(viewModel)
+        PasswordLengthRange(viewModel)
+        OptionsToInclude(viewModel)
     }
 }
