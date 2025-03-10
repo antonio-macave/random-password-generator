@@ -41,8 +41,8 @@ class MainActivityViewModel : ViewModel() {
                 includeSpecialCharacters = _includeSpecialChars.value
             )
 
-            val generatePassword = getComputedPassword(_sliderValue.value.toInt(), charsToUse)
-            _generatedPassword.value = generatePassword
+            val generatedPassword = getComputedPassword(_sliderValue.value.toInt(), charsToUse)
+            _generatedPassword.value = generatedPassword
         } else {
             noOptionSelected()
         }
