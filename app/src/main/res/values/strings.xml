@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">Password Generator</string>
+    <string name="app_name">Gerador de Senhas</string>
 
     <string name="include">Incluir:</string>
     <string name="capital_letters">Letras maiúsculas</string>
-    <string name="noncapital_letters">Letras minúsculas</string>
+    <string name="lowercase_letters">Letras minúsculas</string>
     <string name="numbers">Números</string>
     <string name="special_chars">Caracteres especiais</string>
     <string name="generate_password">Gerar senha</string>
     <string name="please_select_an_option">Por favor, inclua algum tipo de caractere.</string>
-    <string name="disclaimer_title">Disclaimer</string>
+    <string name="disclaimer_title" translatable="false">Disclaimer</string>
     <string name="characters_quantity">Quantidade de caracteres</string>
     <string name="disclaimer_content">
         Este aplicativo foi desenvolvido para fins de entretenimento e uso geral.
         As senhas geradas neste aplicativo não devem, em nenhuma circunstância, ser utilizadas para proteger informações sensíveis.
-        O desenvenvolvedor não se responsabiliza por quaisquer danos ou perdas decorrentes do uso das senhas geradas.
+        O desenvenvolvedor não se responsabiliza por quaisquer danos ou perdas decorrentes do uso das senhas geradas neste aplicativo.
     </string>
-    <string name="got_it">Entendido</string>
+    <string name="got_it">Entendido!</string>
 </resources>
