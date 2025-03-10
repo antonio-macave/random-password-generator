@@ -131,7 +131,7 @@ fun OptionsToInclude(viewModel: MainActivityViewModel) {
         viewModel.updateIncludeCapitalLetterValue(!includeCapitalLetters)
     }
 
-    CheckBoxOption(text = stringResource(id = R.string.noncapital_letters), checked = includeNonCapitalLetters) {
+    CheckBoxOption(text = stringResource(id = R.string.lowercase_letters), checked = includeNonCapitalLetters) {
         viewModel.updateIncludeNonCapitalLettersValue(!includeNonCapitalLetters)
     }
 
