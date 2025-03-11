@@ -1,5 +1,7 @@
 package mz.co.macave.passwordgenerator
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -24,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
@@ -42,10 +45,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             PasswordGeneratorTheme {
 
+                val context = LocalContext.current
                 val viewModel = MainActivityViewModel()
                 val snackbarHostState = remember { SnackbarHostState() }
                 val scope = rememberCoroutineScope()
                 val showDisclaimerDialog by viewModel.showDisclaimerDialog.collectAsStateWithLifecycle()
+                val password by viewModel.password.collectAsStateWithLifecycle()
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -55,7 +60,16 @@ class MainActivity : ComponentActivity() {
 
                     Column(modifier = Modifier.padding(innerPadding)) {
 
-                        TextInput(viewModel)
+                        TextInput(viewModel) {
+                            //onCopyButtonClick
+                            val clipboardManager = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                            val clipData = ClipData.newPlainText("password",password)
+                            clipboardManager.setPrimaryClip(clipData)
+                            scope.launch {
+                                val text = getString(R.string.copied)
+                                snackbarHostState.showSnackbar(message = text)
+                            }
+                        }
                         PasswordLengthRange(viewModel)
                         OptionsToInclude(viewModel)
                         GenerateButton {

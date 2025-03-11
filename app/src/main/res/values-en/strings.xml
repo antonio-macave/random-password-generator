@@ -15,4 +15,5 @@
         The developer is not responsible for any data or losses resulting from the use of passwords generated in this application.
     </string>
     <string name="include">Include:</string>
+    <string name="copied">Copied!</string>
 </resources>

@@ -30,12 +30,12 @@ import mz.co.macave.passwordgenerator.R
 import mz.co.macave.passwordgenerator.viewmodel.MainActivityViewModel
 
 @Composable
-fun TextInput(viewModel: MainActivityViewModel) {
+fun TextInput(viewModel: MainActivityViewModel, onCopyClick: ()-> Unit) {
 
     val text by viewModel.password.collectAsStateWithLifecycle()
 
     Row(
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.Bottom
     ) {
 
         TextField(
@@ -56,13 +56,14 @@ fun TextInput(viewModel: MainActivityViewModel) {
         IconButton(
             modifier = Modifier
                 .weight(0.15f)
-                .padding(end = 24.dp)
+                .padding(end = 24.dp, bottom = 24.dp)
                 .size(24.dp),
-            onClick = {
-
-            }
+            enabled = text.isNotEmpty(),
+            onClick = { onCopyClick() }
         ) {
             Icon(
+                modifier = Modifier
+                    .size(24.dp),
                 painter = painterResource(id = R.drawable.ic_content_copy),
                 contentDescription = stringResource(
                     id = android.R.string.copy)
@@ -187,7 +188,7 @@ fun CheckBoxOption(text: String, checked: Boolean, onCheckedChanged: () -> Unit)
 fun Previews() {
     Column {
         val viewModel = MainActivityViewModel()
-        TextInput(viewModel)
+        TextInput(viewModel) { }
         PasswordLengthRange(viewModel)
         OptionsToInclude(viewModel)
     }
