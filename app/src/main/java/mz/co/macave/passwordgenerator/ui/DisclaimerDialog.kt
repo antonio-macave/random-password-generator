@@ -63,7 +63,6 @@ fun DisclaimerTitle() {
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-
         Icon(imageVector = Icons.Default.Info, contentDescription = null)
         Spacer(modifier = Modifier.width(16.dp))
         Text(

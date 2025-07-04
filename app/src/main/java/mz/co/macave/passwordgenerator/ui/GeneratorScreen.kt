@@ -1,5 +1,8 @@
 package mz.co.macave.passwordgenerator.ui
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,10 +18,15 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.delay
 import mz.co.macave.passwordgenerator.R
 import mz.co.macave.passwordgenerator.viewmodel.MainActivityViewModel
 
@@ -155,7 +164,32 @@ fun GenerateButton(onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        Button(onClick = { onClick() }) {
+
+        var isPressed by remember { mutableStateOf(false) }
+
+        val scale by animateFloatAsState(
+            targetValue = if (isPressed) 1.1f else 1f,
+            animationSpec = tween(
+                durationMillis = 100,
+                easing = FastOutSlowInEasing
+            ),
+            label = "scaleAnim"
+        )
+
+        LaunchedEffect(isPressed) {
+            if (isPressed) {
+                delay(75)
+                isPressed = false
+            }
+        }
+
+        Button(
+            onClick = {
+                isPressed = true
+                onClick()
+            },
+            Modifier.scale(scale)
+        ) {
             Icon(painter = painterResource(id = R.drawable.ic_generate_24), contentDescription = stringResource(
                 id = R.string.generate_password
             ))
