@@ -165,24 +165,6 @@ fun GenerateButton(onClick: () -> Unit) {
         horizontalArrangement = Arrangement.Center
     ) {
 
-        var isPressed by remember { mutableStateOf(false) }
-
-        val scale by animateFloatAsState(
-            targetValue = if (isPressed) 1.1f else 1f,
-            animationSpec = tween(
-                durationMillis = 100,
-                easing = FastOutSlowInEasing
-            ),
-            label = "scaleAnim"
-        )
-
-        LaunchedEffect(isPressed) {
-            if (isPressed) {
-                delay(75)
-                isPressed = false
-            }
-        }
-
         Button(
             onClick = {
                 isPressed = true
